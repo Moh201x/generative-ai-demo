@@ -1,9 +1,9 @@
 body {
-    background-color: #f8f9fa; /* Light gray background color */
+    background-color: #f8f9fa; 
 }
 
 .container {
-    animation: fadeIn 1s; /* Fade-in animation */
+    animation: fadeIn 1s;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,24 +15,24 @@ body {
     text-align: center;
 }
 
-/* Custom styles for the form container */
+
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 600px; /* Adjust the max-width to your preference */
+    max-width: 600px; 
     width: 100%;
     padding: 20px;
 }
 
-/* Custom styles for labels */
+
 .label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-/* Custom styles for input fields and button */
+
 .form-control {
     font-size: 18px;
     padding: 12px 20px;

@@ -1,9 +1,9 @@
 body {
-    background-color: #f8f9fa; /* Light gray background color */
+    background-color: #f8f9fa; 
 }
 
 .container {
-    animation: fadeIn 1s; /* Fade-in animation */
+    animation: fadeIn 1s; 
 }
 
 .card {
@@ -18,20 +18,19 @@ body {
     font-weight: bold;
 }
 
-/* Custom styles for the logo in card headers */
 .logo {
     height: 30px;
     width: 30px;
     margin-right: 10px;
-    fill: blue; /* Set the fill color to blue for SVG logos or background-color for other image formats */
+    fill: blue; 
 }
 
 .card-body {
     font-size: 16px;
 }
 
-/* Custom styles for the card headers */
+
 .card-header.bg-primary {
-    background-color: #6c5ce7; /* Purple */
-    color: white; /* Set the text color to white to match the color scheme */
+    background-color: #6c5ce7; 
+    color: white; 
 }
