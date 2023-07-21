@@ -1,0 +1,52 @@
+body {
+    background-color: #f8f9fa; /* Light gray background color */
+}
+
+.container {
+    animation: fadeIn 1s; /* Fade-in animation */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.logo {
+    text-align: center;
+}
+
+/* Custom styles for the form container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px; /* Adjust the max-width to your preference */
+    width: 100%;
+    padding: 20px;
+}
+
+/* Custom styles for labels */
+.label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Custom styles for input fields and button */
+.form-control {
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn {
+    max-width: 400px;
+    width: 100%;
+    margin-top: 50px;
+}
+button{
+    background-color: purple;
+}
