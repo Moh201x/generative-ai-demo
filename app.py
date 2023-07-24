@@ -1,5 +1,4 @@
-from flask import Flask, request, jsonify,render_template
-import requests
+from flask import Flask, request,render_template
 import learn
 import os
 from dotenv import load_dotenv
