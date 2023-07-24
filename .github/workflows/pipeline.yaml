@@ -1,36 +1,40 @@
-name: Python package
 
-on: [push]
+name: Build and deploy Python app to Azure Web App - gen-ai-demo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-          
-      - name: Create virtual environment
-        run: python -m venv venv
+      - uses: actions/checkout@v2
 
-        
-        
-      - name: Install dependencies
+      - name: Set up Python version
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.11'
+
+      - name: Create and start virtual environment
         run: |
+          python -m venv venv
           source venv/bin/activate
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
 
-      - name: Deploy to Azure Web App
+
+
+          
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
-         app-name: gen-ai-demo
-         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}   
+          app-name: 'gen-ai-demo'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
