@@ -63,7 +63,7 @@ def makeApiCall(type,des):
         print(response.text) 
         return '404'
 
-@app.route('/')
+@app.route('/ai')
 def homePage():
     return render_template('index.html')
     
