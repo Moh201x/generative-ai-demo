@@ -1,4 +1,5 @@
 from flask import Flask, request,render_template
+import requests
 import learn
 import os
 from dotenv import load_dotenv
