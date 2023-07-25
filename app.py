@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import google.auth
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
+import json
 
 
 app = Flask(__name__)
@@ -13,7 +14,6 @@ app = Flask(__name__)
 
 load_dotenv()
 
-credentials_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_JSON')
 
 
 def extract_sentences(api_response):
@@ -28,8 +28,9 @@ def extract_sentences(api_response):
 
 
 def getKey():
+     json_content = os.environ.get('MY_SECRET')
      credentials = service_account.Credentials.from_service_account_file(
-        '/etc/secrets/service.json',
+        json.loads(json_content),
         scopes=["https://www.googleapis.com/auth/cloud-platform"]
     )
      credentials.refresh(Request())
