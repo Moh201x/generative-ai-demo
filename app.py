@@ -5,12 +5,15 @@ import os
 from dotenv import load_dotenv
 import google.auth
 from google.auth.transport.requests import Request
+from google.oauth2 import service_account
 
 
 app = Flask(__name__)
 
 
 load_dotenv()
+
+credentials_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_JSON')
 
 
 def extract_sentences(api_response):
@@ -25,13 +28,12 @@ def extract_sentences(api_response):
 
 
 def getKey():
-    API_ENDPOINT = "us-central1-aiplatform.googleapis.com"
-    GOOGLE_KEY = os.environ.get("GOOGLE_KEY")
-    URL = f"https://{API_ENDPOINT}/v1/projects/{GOOGLE_KEY}/locations/us-central1/publishers/google/models/chat-bison@001:predict"
-    creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
-    creds.refresh(Request())
-    return creds.token
-
+     credentials = service_account.Credentials.from_service_account_file(
+        '/etc/secrets/service.json',
+        scopes=["https://www.googleapis.com/auth/cloud-platform"]
+    )
+     credentials.refresh(Request())
+     return credentials.token
     
 
 def makeApiCall(type,des):
@@ -45,8 +47,6 @@ def makeApiCall(type,des):
     headers = {
         "Authorization": f"Bearer {getKey()}",
         "Content-Type": "application/json",
-        "lifetime": "LIFETIME"
-
     }
 
     payload = {
@@ -64,7 +64,6 @@ def makeApiCall(type,des):
     }
 
     response = requests.post(url, headers=headers, json=payload)
-
     if response.status_code == 200:
         print("Request successful!")
         print("Response content:")
@@ -82,7 +81,11 @@ def homePage():
     
 @app.route('/info',methods=['POST'])
 def display_data():
-    content= makeApiCall(request.form.get('ctype'),request.form.get('cdes'))['predictions'][0]['content']
+    content=makeApiCall(request.form.get('ctype'),request.form.get('cdes'))
+    if(content=='401'):
+        return '401'
+    else:
+        content= content['predictions'][0]['content']
     if(content=='this is not cloth type'):
         return render_template('error.html')
     else:    
